@@ -2,6 +2,8 @@
 	import Check from "./icons/Check.svg.svelte";
 	import Backspace from "./icons/Backspace.svg.svelte";
 
+	export let variant = 'default';
+
 	function onConfirm() {
 		console.log("confirm");
 	}
@@ -38,11 +40,11 @@
 	}
 
 	button:active {
-		background-color: lightgrey;
+		background-color: var(--color-border);
 	}
 
 	.btn {
-		min-height: 2em;
+		min-height: 2.5em;
 	}
 
 	.btn--last-digit {
@@ -62,10 +64,35 @@
 	.icon {
 		max-width: 0.95em;
 		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.bordered {
+		border: 1px solid var(--color-border);
+		border-right-width: 0;
+		border-bottom-width: 0;
+	}
+
+	.bordered .btn {
+		border: 1px solid var(--color-border);
+		border-left-width: 0;
+		border-top-width: 0;
+	}
+
+	.circular {
+		justify-items: center;
+	}
+
+	.circular .btn {
+		height: 3em;
+		width: 3em;
+		border: 1px solid var(--color-border);
+		margin: .25em;
+		border-radius: 2000px;
 	}
 </style>
 
-<div class="grid">
+<div class="grid {variant !== 'default' ? variant : ''}">
 	<button class="btn">1</button>
 	<button class="btn">2</button>
 	<button class="btn">3</button>
