@@ -48,6 +48,7 @@
 
 		font-size: 2em;
 		font-weight: bold;
+		margin-top: 0;
 	}
 
 	button:active {
