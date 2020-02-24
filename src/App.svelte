@@ -37,7 +37,7 @@
 	div {
 		margin-left: auto;
 		margin-right: auto;
-		max-width: 36rem;
+		max-width: 22rem;
 	}
 </style>
 

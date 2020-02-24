@@ -1,5 +1,5 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher } from "svelte";
 
 	import Check from "./icons/Check.svg.svelte";
 	import Backspace from "./icons/Backspace.svg.svelte";
@@ -8,21 +8,21 @@
 	export let variant = "default";
 	export let shuffle = false;
 
-	const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+	const digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 	const shuffledDigits = shuffle ? shuffleFn(digits) : digits;
 
 	const dispatch = createEventDispatcher();
 
 	function onConfirm() {
-		dispatch('confirm');
+		dispatch("confirm");
 	}
 
 	function onDelete() {
-		dispatch('delete');
+		dispatch("delete");
 	}
 
 	function onPress(v) {
-		dispatch('press', { value: `${v}` });
+		dispatch("press", { value: v });
 	}
 </script>
 
@@ -43,10 +43,8 @@
 		line-height: normal;
 		overflow: visible;
 		padding: 0;
-		-webkit-appearance: button; /* for input */
-		-webkit-user-select: none; /* for button */
-		-moz-user-select: none;
-		-ms-user-select: none;
+		appearance: button; /* for input */
+		user-select: none;
 
 		font-size: 2em;
 		font-weight: bold;
@@ -108,8 +106,9 @@
 <div class="grid {variant !== 'default' ? variant : ''}">
 	{#each shuffledDigits as digit}
 	<button
-		class="btn {digit === shuffledDigits[shuffledDigits.length -1] ? 'btn--last-digit' : ''}"
-		on:click={e => onPress(digit)}
+		class="btn {digit === shuffledDigits[shuffledDigits.length -1] ?
+'btn--last-digit' : ''}"
+		on:click="{e => onPress(digit)}"
 	>
 		{digit}
 	</button>
