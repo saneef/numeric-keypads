@@ -1,31 +1,3 @@
-<script>
-	import { createEventDispatcher } from "svelte";
-
-	import Check from "./icons/Check.svg.svelte";
-	import Backspace from "./icons/Backspace.svg.svelte";
-	import shuffleFn from "./lib/shuffle";
-
-	export let variant = "default";
-	export let shuffle = false;
-
-	const digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-	const shuffledDigits = shuffle ? shuffleFn(digits) : digits;
-
-	const dispatch = createEventDispatcher();
-
-	function onConfirm() {
-		dispatch("confirm");
-	}
-
-	function onDelete() {
-		dispatch("delete");
-	}
-
-	function onPress(v) {
-		dispatch("press", { value: v });
-	}
-</script>
-
 <style>
 	.grid {
 		display: grid;
@@ -53,6 +25,11 @@
 
 	button:active {
 		background-color: var(--color-border);
+	}
+
+	button[disabled] {
+		color: var(--color-gray-5);
+		pointer-events: none;
 	}
 
 	.btn {
@@ -96,17 +73,50 @@
 	}
 
 	.circular .btn {
-		height: 2.75em;
-		width: 2.75em;
+		min-height: auto;
+		height: 2.25em;
+		width: 2.25em;
 		border: 1px solid var(--color-border);
-		margin: 0.25em;
+		margin: 0.125em;
 		border-radius: 2000px;
 	}
 </style>
 
+<script>
+	import { createEventDispatcher } from "svelte";
+
+	import Check from "./icons/Check.svg.svelte";
+	import Backspace from "./icons/Backspace.svg.svelte";
+	import shuffleFn from "./lib/shuffle";
+
+	export let variant = "default";
+	export let shuffle = false;
+	export let disabled = false;
+
+	$:console.log('disabled', disabled);
+
+	const digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+	const shuffledDigits = shuffle ? shuffleFn(digits) : digits;
+
+	const dispatch = createEventDispatcher();
+
+	function onConfirm() {
+		dispatch("confirm");
+	}
+
+	function onDelete() {
+		dispatch("delete");
+	}
+
+	function onPress(v) {
+		dispatch("press", { value: v });
+	}
+</script>
+
 <div class="grid {variant !== 'default' ? variant : ''}">
 	{#each shuffledDigits as digit}
 	<button
+		{disabled}
 		class="btn {digit === shuffledDigits[shuffledDigits.length -1] ?
 'btn--last-digit' : ''}"
 		on:click="{e => onPress(digit)}"
