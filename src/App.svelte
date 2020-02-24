@@ -1,30 +1,33 @@
 <script>
+	import NumericKeypad from "./NumericKeypad.svelte";
+
 	export let name;
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+	:global(html) {
+		--color-dark: #212529;
+		--color-light: #f8f9fa;
+
+		--color-success: #37b24d;
+		--color-warning: #f59f00;
+		--color-danger: #f03e3e;
+
+		color: var(--color-dark);
 	}
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	:global(body) {
+		margin: 0;
+		font-family: system-ui;
 	}
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	div {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 75ch;
 	}
 </style>
+
+<div>
+	<NumericKeypad />
+</div>
