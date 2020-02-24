@@ -1,15 +1,28 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
+
 	import Check from "./icons/Check.svg.svelte";
 	import Backspace from "./icons/Backspace.svg.svelte";
+	import shuffleFn from "./lib/shuffle";
 
-	export let variant = 'default';
+	export let variant = "default";
+	export let shuffle = false;
+
+	const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+	const shuffledDigits = shuffle ? shuffleFn(digits) : digits;
+
+	const dispatch = createEventDispatcher();
 
 	function onConfirm() {
-		console.log("confirm");
+		dispatch('confirm');
 	}
 
 	function onDelete() {
-		console.log("delete");
+		dispatch('delete');
+	}
+
+	function onPress(v) {
+		dispatch('press', { value: `${v}` });
 	}
 </script>
 
@@ -84,25 +97,23 @@
 	}
 
 	.circular .btn {
-		height: 3em;
-		width: 3em;
+		height: 2.75em;
+		width: 2.75em;
 		border: 1px solid var(--color-border);
-		margin: .25em;
+		margin: 0.25em;
 		border-radius: 2000px;
 	}
 </style>
 
 <div class="grid {variant !== 'default' ? variant : ''}">
-	<button class="btn">1</button>
-	<button class="btn">2</button>
-	<button class="btn">3</button>
-	<button class="btn">4</button>
-	<button class="btn">5</button>
-	<button class="btn">6</button>
-	<button class="btn">7</button>
-	<button class="btn">8</button>
-	<button class="btn">9</button>
-	<button class="btn btn--last-digit">0</button>
+	{#each shuffledDigits as digit}
+	<button
+		class="btn {digit === shuffledDigits[shuffledDigits.length -1] ? 'btn--last-digit' : ''}"
+		on:click={e => onPress(digit)}
+	>
+		{digit}
+	</button>
+	{/each}
 	<button class="btn btn--icon btn--del" on:click="{onDelete}">
 		<div class="icon">
 			<Backspace />

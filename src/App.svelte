@@ -1,5 +1,17 @@
 <script>
 	import NumericKeypad from "./NumericKeypad.svelte";
+
+	function onDelete() {
+		console.log("delete");
+	}
+
+	function onConfirm() {
+		console.log("confirm");
+	}
+
+	function onPress(data) {
+		console.log("press", data.detail);
+	}
 </script>
 
 <style>
@@ -30,7 +42,24 @@
 </style>
 
 <div>
-	<NumericKeypad />
-	<NumericKeypad variant="bordered"/>
-	<NumericKeypad variant="circular"/>
+	<NumericKeypad
+		shuffle
+		on:confirm="{onConfirm}"
+		on:delete="{onDelete}"
+		on:press="{onPress}"
+	/>
+	<NumericKeypad
+		variant="bordered"
+		shuffle
+		on:confirm="{onConfirm}"
+		on:delete="{onDelete}"
+		on:press="{onPress}"
+	/>
+	<NumericKeypad
+		variant="circular"
+		shuffle
+		on:confirm="{onConfirm}"
+		on:delete="{onDelete}"
+		on:press="{onPress}"
+	/>
 </div>
