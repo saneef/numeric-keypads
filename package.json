@@ -9,6 +9,8 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.7",
     "postcss": "^7.0.27",
     "postcss-load-config": "^2.1.0",
     "postcss-preset-env": "^6.7.0",
@@ -23,5 +25,13 @@
   },
   "dependencies": {
     "sirv-cli": "^0.4.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{svelte,js,css,md}": "prettier --write"
   }
 }
