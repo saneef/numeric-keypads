@@ -121,14 +121,12 @@
 
 <div class="grid {variant}">
 	{#each shuffledDigits as digit}
-	<button
-		{disabled}
-		class="btn {digit === shuffledDigits[shuffledDigits.length -1] ?
-'btn--last-digit' : ''}"
-		on:click="{e => onPress(digit)}"
-	>
-		{digit}
-	</button>
+		<button
+			{disabled}
+			class="btn {digit === shuffledDigits[shuffledDigits.length - 1] ? 'btn--last-digit' : ''}"
+			on:click="{e => onPress(digit)}">
+			{digit}
+		</button>
 	{/each}
 	<button class="btn btn--icon btn--del" on:click="{onDelete}">
 		<div class="icon">

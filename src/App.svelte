@@ -57,7 +57,7 @@
 			<div>1 ⁄ 12</div>
 		</div>
 		<div class="main">
-			<KeypadTester numOfDigits={6} />
+			<KeypadTester numOfDigits="{6}" />
 		</div>
 	</div>
 </div>
