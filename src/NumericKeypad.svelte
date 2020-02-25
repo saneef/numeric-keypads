@@ -28,7 +28,8 @@
 	}
 
 	button[disabled] {
-		color: var(--color-gray-5);
+		color: var(--color-gray-3);
+		border-color: currentColor;
 		pointer-events: none;
 	}
 
@@ -80,6 +81,11 @@
 		margin: 0.125em;
 		border-radius: 2000px;
 	}
+
+	.bordered button[disabled],
+	.circular button[disabled] {
+		background-color: var(--color-gray-1);
+	}
 </style>
 
 <script>
@@ -89,11 +95,11 @@
 	import Backspace from "./icons/Backspace.svg.svelte";
 	import shuffleFn from "./lib/shuffle";
 
-	export let variant = "default";
+	export let variant = "no-border";
 	export let shuffle = false;
 	export let disabled = false;
 
-	$:console.log('disabled', disabled);
+	$: console.log("disabled", disabled);
 
 	const digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 	const shuffledDigits = shuffle ? shuffleFn(digits) : digits;
@@ -113,7 +119,7 @@
 	}
 </script>
 
-<div class="grid {variant !== 'default' ? variant : ''}">
+<div class="grid {variant}">
 	{#each shuffledDigits as digit}
 	<button
 		{disabled}
