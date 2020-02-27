@@ -93,9 +93,9 @@
 
 	export let variant = "no-border";
 	export let shuffle = false;
-	export let disabled = false;
-
-	$: console.log("disabled", disabled);
+	export let disabledDigits = false;
+	export let disabledConfirm = false;
+	export let disabledDelete = false;
 
 	const digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 	const shuffledDigits = shuffle ? shuffleFn(digits) : digits;
@@ -118,16 +118,22 @@
 <div class="grid {variant}">
 	{#each shuffledDigits as digit}
 		<button
-			{disabled}
+			disabled="{disabledDigits}"
 			class="btn {digit === shuffledDigits[shuffledDigits.length - 1] ? 'btn--last-digit' : ''}"
 			on:click="{e => onPress(digit)}">
 			{digit}
 		</button>
 	{/each}
-	<button class="btn btn--icon btn--del" on:click="{onDelete}">
-			<Icon class="icon" icon="backspace" />
+	<button
+		disabled="{disabledDelete}"
+		class="btn btn--icon btn--del"
+		on:click="{onDelete}">
+		<Icon class="icon" icon="backspace" />
 	</button>
-	<button class="btn btn--icon btn--confirm" on:click="{onConfirm}">
-			<Icon class="icon" icon="check"/>
+	<button
+		disabled="{disabledConfirm}"
+		class="btn btn--icon btn--confirm"
+		on:click="{onConfirm}">
+		<Icon class="icon" icon="check" />
 	</button>
 </div>

@@ -61,60 +61,42 @@
 </style>
 
 <script>
+	import keypadTesterMachine from "./machines/keypad-tester";
+	import useMachine from "./lib/useMachine";
 	import random from "./lib/random";
 	import NumericKeypad from "./NumericKeypad.svelte";
 
 	export let numOfDigits = 6;
-	let hasError = true;
-	let disabled = false;
-	const questionNumber = random(numOfDigits);
 
 	let currentNumber = "";
 	let paddedString = Array.from({ length: numOfDigits }).map(c => "");
 
-	$: console.log(paddedString);
-	$: {
-		paddedString = padString(currentNumber, numOfDigits);
-		hasError = false;
-	}
-	$: disabled = currentNumber.length >= numOfDigits;
+	const [state, send] = useMachine(
+		keypadTesterMachine.withConfig(
+			{},
+			{
+				numOfDigits,
+				digits: [],
+				pin: random(numOfDigits),
+			}
+		)
+	);
 
-	function onDelete() {
-		currentNumber = currentNumber.slice(0, -1);
-	}
+	$: context = $state.context;
+	$: paddedDigits = getPaddedDigits($state);
 
-	function onConfirm() {
-		if (currentNumber === questionNumber) {
-			console.log("correct");
-		} else {
-			console.log("wrong");
-			hasError = true;
-		}
-	}
-
-	function onPress(data) {
-		const digit = data && data.detail && data.detail.value;
-
-		if (digit !== undefined && currentNumber.length < numOfDigits) {
-			currentNumber += digit;
-		}
-	}
-
-	function padString(str, n) {
-		const arr = str.split("");
-
-		return Array.from({ length: n }).map((_, i) =>
-			arr[i] !== undefined ? arr[i] : ""
-		);
+	function getPaddedDigits(s) {
+		const digits = s.context.digits;
+		return Array.from({ length: numOfDigits }).map((c, i) => digits[i] || "");
 	}
 </script>
 
 <div class="hud">
 	<h3 class="legend">Type</h3>
-	<h2 class="question">{questionNumber}</h2>
-	<h1 class="answer" class:hasError>
+	<h2 class="question">{context.pin}</h2>
+	<h1 class="answer" class:hasError="{$state.matches('error')}">
 		<span>
-			{#each paddedString as ch}
+			{#each paddedDigits as ch}
 				{#if ch === ''}
 					<span class="empty-char">&middot;</span>
 				{:else}
@@ -127,7 +109,9 @@
 <NumericKeypad
 	variant="circular"
 	shuffle
-	{disabled}
-	on:confirm="{onConfirm}"
-	on:delete="{onDelete}"
-	on:press="{onPress}" />
+	disabledDigits="{$state.matches('filled-in') || $state.matches('error') || $state.matches('complete')}"
+	disabledConfirm="{!$state.matches('filled-in') || $state.matches('complete')}"
+	disabledDelete="{$state.matches('complete')}"
+	on:confirm="{e => send('CONFIRM')}"
+	on:delete="{e => send('DELETE')}"
+	on:press="{e => send({ type: 'PRESS', value: e.detail.value })}" />
