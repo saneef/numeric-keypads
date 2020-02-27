@@ -35,6 +35,9 @@
 
 	.btn {
 		min-height: 2.5em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.btn--last-digit {
@@ -49,12 +52,6 @@
 	.btn--confirm {
 		grid-column: 3;
 		color: var(--color-success);
-	}
-
-	.icon {
-		max-width: 0.95em;
-		display: inline-block;
-		vertical-align: middle;
 	}
 
 	.bordered {
@@ -91,8 +88,7 @@
 <script>
 	import { createEventDispatcher } from "svelte";
 
-	import Check from "./icons/Check.svg.svelte";
-	import Backspace from "./icons/Backspace.svg.svelte";
+	import Icon from "./Icon.svelte";
 	import shuffleFn from "./lib/shuffle";
 
 	export let variant = "no-border";
@@ -129,13 +125,9 @@
 		</button>
 	{/each}
 	<button class="btn btn--icon btn--del" on:click="{onDelete}">
-		<div class="icon">
-			<Backspace />
-		</div>
+			<Icon class="icon" icon="backspace" />
 	</button>
 	<button class="btn btn--icon btn--confirm" on:click="{onConfirm}">
-		<div class="icon">
-			<Check />
-		</div>
+			<Icon class="icon" icon="check"/>
 	</button>
 </div>
