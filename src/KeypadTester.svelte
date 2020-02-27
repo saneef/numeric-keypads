@@ -61,12 +61,16 @@
 </style>
 
 <script>
+	import { createEventDispatcher } from "svelte";
 	import keypadTesterMachine from "./machines/keypad-tester";
 	import useMachine from "./lib/useMachine";
 	import random from "./lib/random";
 	import NumericKeypad from "./NumericKeypad.svelte";
 
+	const dispatch = createEventDispatcher();
+
 	export let numOfDigits = 6;
+	export let variant = "circular";
 
 	let currentNumber = "";
 	let paddedString = Array.from({ length: numOfDigits }).map(c => "");
@@ -84,10 +88,22 @@
 
 	$: context = $state.context;
 	$: paddedDigits = getPaddedDigits($state);
+	$: if ($state.matches("complete")) {
+		onComplete();
+	}
 
 	function getPaddedDigits(s) {
 		const digits = s.context.digits;
 		return Array.from({ length: numOfDigits }).map((c, i) => digits[i] || "");
+	}
+
+	function onComplete() {
+		const timeTaken = context.endedAt - context.startedAt;
+
+		dispatch("complete", {
+			pin: context.pin,
+			timeTaken,
+		});
 	}
 </script>
 
@@ -107,7 +123,7 @@
 	</h1>
 </div>
 <NumericKeypad
-	variant="circular"
+	{variant}
 	shuffle
 	disabledDigits="{$state.matches('filled-in') || $state.matches('error') || $state.matches('complete')}"
 	disabledConfirm="{!$state.matches('filled-in') || $state.matches('complete')}"

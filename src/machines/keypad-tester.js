@@ -57,18 +57,18 @@ export default Machine(
 				},
 			},
 			complete: {
-				onEntry: ["updateEndTime"],
+				onEntry: "updateEndTime",
 			},
 		},
 	},
 	{
 		actions: {
-			updateStartTime: assign({
+			updateStartTime: assign(() => ({
 				startedAt: Date.now(),
-			}),
-			updateEndTime: assign({
-				EndedAt: Date.now(),
-			}),
+			})),
+			updateEndTime: assign(() => ({
+				endedAt: Date.now(),
+			})),
 			updateValue: assign((ctx, e) => {
 				const { digits, numOfDigits } = ctx;
 				const { value } = e;
