@@ -33,7 +33,7 @@
 	.bounds {
 		margin-left: auto;
 		margin-right: auto;
-		max-width: 24rem;
+		max-width: 26rem;
 	}
 
 	.grid {
