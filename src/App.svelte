@@ -61,10 +61,6 @@
 		justify-content: space-between;
 		padding: 1em;
 	}
-
-	.hide {
-		display: none;
-	}
 </style>
 
 <script>
@@ -114,13 +110,13 @@
 		<div class="main">
 
 			{#each state as s, index (s.id)}
-				<div class:hide="{index !== currentIndex}">
+				{#if index === currentIndex}
 					<KeypadTester
 						numOfDigits="{6}"
 						variant="{s.variant}"
 						{disableShuffle}
 						on:complete="{onAnswer}" />
-				</div>
+				{/if}
 			{/each}
 			{#if totalTrials <= currentIndex}
 				<Report data="{state}" />
