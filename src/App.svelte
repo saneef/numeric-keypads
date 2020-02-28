@@ -34,6 +34,7 @@
 		margin-left: auto;
 		margin-right: auto;
 		max-width: 24rem;
+		padding-top: env(safe-area-inset-top);
 	}
 
 	.grid {
@@ -54,7 +55,7 @@
 	.header {
 		display: flex;
 		justify-content: space-between;
-		padding: 1em 0;
+		padding: 1em;
 	}
 
 	.hide {
