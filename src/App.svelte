@@ -52,6 +52,7 @@
 
 	.link {
 		margin-top: 0;
+		font-weight: bold;
 		color: var(--color-text-light);
 	}
 
@@ -108,7 +109,7 @@
 	<div class="grid">
 		<div class="header">
 			<div>{Math.min(currentIndex + 1, totalTrials)} ⁄ {totalTrials}</div>
-			<a class="link" href="#reset" on:click="{onReset}">RESET</a>
+			<a class="link" href="#reset" on:click="{onReset}">Reset</a>
 		</div>
 		<div class="main">
 
