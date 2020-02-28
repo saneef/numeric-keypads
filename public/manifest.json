@@ -1,8 +1,8 @@
 {
 	"background_color": "#ffffff",
 	"theme_color": "#333333",
-	"name": "Keypad Test",
-	"short_name": "Keypad Test",
+	"name": "Keypads",
+	"short_name": "Keypads",
 	"display": "minimal-ui",
 	"start_url": "/",
 	"icons": [
