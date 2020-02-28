@@ -64,6 +64,7 @@
 
 <script>
 	import KeypadTester from "./KeypadTester.svelte";
+	import Report from "./Report.svelte";
 	import { shuffle } from "./lib/random.js";
 
 	export let trials;
@@ -102,10 +103,11 @@
 <div class="bounds">
 	<div class="grid">
 		<div class="header">
-			<div>{currentIndex + 1} ⁄ {totalTrials}</div>
-			<a class="link" href="#" on:click="{onReset}">RESET</a>
+			<div>{Math.min(currentIndex + 1, totalTrials)} ⁄ {totalTrials}</div>
+			<a class="link" href="#reset" on:click="{onReset}">RESET</a>
 		</div>
 		<div class="main">
+
 			{#each state as s, index (s.id)}
 				<div class:hide="{index !== currentIndex}">
 					<KeypadTester
@@ -115,6 +117,9 @@
 						on:complete="{onAnswer}" />
 				</div>
 			{/each}
+			{#if totalTrials <= currentIndex}
+				<Report data="{state}" />
+			{/if}
 		</div>
 	</div>
 </div>
