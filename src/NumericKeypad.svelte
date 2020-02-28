@@ -91,7 +91,8 @@
 	import Icon from "./Icon.svelte";
 	import shuffleFn from "./lib/shuffle";
 
-	export let variant = "no-border";
+	const variants = ["no-border", "bordered", "circular"];
+	export let variant = variants[0];
 	export let shuffle = false;
 	export let disabledDigits = false;
 	export let disabledConfirm = false;

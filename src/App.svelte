@@ -45,27 +45,76 @@
 	.main {
 		align-self: end;
 	}
+
+	.link {
+		margin-top: 0;
+		color: var(--color-text-light);
+	}
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		padding: 1em 0;
+	}
+
+	.hide {
+		display: none;
+	}
 </style>
 
 <script>
 	import KeypadTester from "./KeypadTester.svelte";
+	import { shuffle } from "./lib/random.js";
 
 	export let trials;
 	export let disableShuffle = false;
 	const variants = ["no-border", "bordered", "circular"];
+
+	let currentIndex = 0;
+	const totalTrials = trials * variants.length;
+	let state = shuffle(
+		variants
+			.map((variant, i) => {
+				return Array.from({ length: trials }).map((_, j) => ({
+					id: `${i}-${j}`,
+					variant,
+				}));
+			})
+			.flat()
+	);
+
+	function onAnswer(e) {
+		const { pin, timeTaken } = e.detail;
+		state[currentIndex] = {
+			...state[currentIndex],
+			pin,
+			timeTaken,
+		};
+		currentIndex += 1;
+	}
+
+	function onReset(e) {
+		e.preventDefault();
+		location.reload();
+	}
 </script>
 
 <div class="bounds">
 	<div class="grid">
 		<div class="header">
-			<div>1 ⁄ 12</div>
+			<div>{currentIndex + 1} ⁄ {totalTrials}</div>
+			<a class="link" href="#" on:click="{onReset}">RESET</a>
 		</div>
 		<div class="main">
-			<KeypadTester
-				numOfDigits="{6}"
-				variant="bordered"
-				{disableShuffle}
-				on:complete="{e => console.log(e)}" />
+			{#each state as s, index (s.id)}
+				<div class:hide="{index !== currentIndex}">
+					<KeypadTester
+						numOfDigits="{6}"
+						variant="{s.variant}"
+						{disableShuffle}
+						on:complete="{onAnswer}" />
+				</div>
+			{/each}
 		</div>
 	</div>
 </div>

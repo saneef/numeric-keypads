@@ -69,7 +69,7 @@
 	import { createEventDispatcher } from "svelte";
 	import keypadTesterMachine from "./machines/keypad-tester";
 	import useMachine from "./lib/useMachine";
-	import random from "./lib/random";
+	import { random } from "./lib/random";
 	import NumericKeypad from "./NumericKeypad.svelte";
 
 	const dispatch = createEventDispatcher();
