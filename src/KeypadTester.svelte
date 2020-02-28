@@ -33,12 +33,13 @@
 
 	.legend {
 		color: var(--color-text-light);
+		font-size: 0.75em;
 		font-weight: normal;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 	}
 
-	.question {
+	.pin {
 		margin-top: 0;
 		color: var(--color-text-light);
 		font-weight: normal;
@@ -50,13 +51,17 @@
 	}
 
 	.empty-char {
-		opacity: 0.5;
+		padding: 0 0.125em;
 	}
 
-	.hasError {
+	.error {
 		animation-name: shake;
 		animation-duration: 600ms;
 		color: var(--color-danger);
+	}
+
+	.success {
+		color: var(--color-success);
 	}
 </style>
 
@@ -71,6 +76,7 @@
 
 	export let numOfDigits = 6;
 	export let variant = "circular";
+	export let disableShuffle = false;
 
 	let currentNumber = "";
 	let paddedString = Array.from({ length: numOfDigits }).map(c => "");
@@ -108,9 +114,12 @@
 </script>
 
 <div class="hud">
-	<h3 class="legend">Type</h3>
-	<h2 class="question">{context.pin}</h2>
-	<h1 class="answer" class:hasError="{$state.matches('error')}">
+	<h3 class="legend">Type & confirm</h3>
+	<h2 class="pin">{context.pin}</h2>
+	<h1
+		class="answer"
+		class:error="{$state.matches('error')}"
+		class:success="{$state.matches('complete')}">
 		<span>
 			{#each paddedDigits as ch}
 				{#if ch === ''}
@@ -124,7 +133,7 @@
 </div>
 <NumericKeypad
 	{variant}
-	shuffle
+	shuffle="{!disableShuffle}"
 	disabledDigits="{$state.matches('filled-in') || $state.matches('error') || $state.matches('complete')}"
 	disabledConfirm="{!$state.matches('filled-in') || $state.matches('complete')}"
 	disabledDelete="{$state.matches('complete')}"

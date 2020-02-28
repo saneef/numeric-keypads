@@ -49,6 +49,10 @@
 
 <script>
 	import KeypadTester from "./KeypadTester.svelte";
+
+	export let trials;
+	export let disableShuffle = false;
+	const variants = ["no-border", "bordered", "circular"];
 </script>
 
 <div class="bounds">
@@ -60,6 +64,7 @@
 			<KeypadTester
 				numOfDigits="{6}"
 				variant="bordered"
+				{disableShuffle}
 				on:complete="{e => console.log(e)}" />
 		</div>
 	</div>
