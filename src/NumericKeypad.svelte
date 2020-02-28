@@ -27,6 +27,10 @@
 		background-color: var(--color-border);
 	}
 
+	button:focus {
+		outline: none;
+	}
+
 	button[disabled] {
 		color: var(--color-gray-3);
 		border-color: currentColor;
