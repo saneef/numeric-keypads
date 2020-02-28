@@ -34,11 +34,11 @@
 		margin-left: auto;
 		margin-right: auto;
 		max-width: 24rem;
-		padding-top: env(safe-area-inset-top);
 	}
 
 	.grid {
-		height: 100vh;
+		min-height: 96vh;
+		padding-top: env(safe-area-inset-top);
 		display: grid;
 		grid-template-rows: auto 1fr;
 	}
