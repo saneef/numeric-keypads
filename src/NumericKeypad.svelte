@@ -18,7 +18,7 @@
 		appearance: button; /* for input */
 		user-select: none;
 
-		font-size: 2em;
+		font-size: 1.777em;
 		font-weight: bold;
 		margin-top: 0;
 	}

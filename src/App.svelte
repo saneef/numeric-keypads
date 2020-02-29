@@ -17,7 +17,7 @@
 		--color-warning: #f59f00;
 		--color-danger: #f03e3e;
 		--color-text: var(--color-gray-9);
-		--color-text-light: var(--color-gray-6);
+		--color-text-light: var(--color-gray-7);
 
 		--border-width: 1px;
 
@@ -52,7 +52,6 @@
 
 	.link {
 		margin-top: 0;
-		font-weight: bold;
 		color: var(--color-text-light);
 	}
 
@@ -60,6 +59,11 @@
 		display: flex;
 		justify-content: space-between;
 		padding: 1em;
+		font-size: 1.333em;
+	}
+
+	.stages {
+		font-weight: bold;
 	}
 </style>
 
@@ -104,7 +108,11 @@
 <div class="bounds">
 	<div class="grid">
 		<div class="header">
-			<div>{Math.min(currentIndex + 1, totalTrials)} ⁄ {totalTrials}</div>
+			<div class="stages">
+				<span class="stage">{Math.min(currentIndex + 1, totalTrials)}</span>
+				⁄
+				<span class="stage">{totalTrials}</span>
+			</div>
 			<a class="link" href="#reset" on:click="{onReset}">Reset</a>
 		</div>
 		<div class="main">

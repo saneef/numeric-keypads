@@ -43,11 +43,13 @@
 		margin-top: 0;
 		color: var(--color-text-light);
 		font-weight: normal;
+		font-size: 1.333em;
 	}
 
 	.answer {
 		letter-spacing: 0.125em;
 		margin-top: 1rem;
+		font-size: 2.369em;
 	}
 
 	.empty-char {
