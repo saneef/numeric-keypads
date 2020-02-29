@@ -98,11 +98,6 @@
 		};
 		currentIndex += 1;
 	}
-
-	function onReset(e) {
-		e.preventDefault();
-		location.reload();
-	}
 </script>
 
 <div class="bounds">
@@ -113,7 +108,12 @@
 				⁄
 				<span class="stage">{totalTrials}</span>
 			</div>
-			<a class="link" href="#reset" on:click="{onReset}">Reset</a>
+			<a
+				class="link"
+				href="#reset"
+				on:click|preventDefault="{() => location.reload()}">
+				Reset
+			</a>
 		</div>
 		<div class="main">
 
