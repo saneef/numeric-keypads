@@ -28,20 +28,22 @@
 		margin: 0;
 		font-family: system-ui;
 		background-color: var(--color-gray-0);
+		padding-top: env(safe-area-inset-top);
+		padding-bottom: env(safe-area-inset-bottom);
+		padding-left: env(safe-area-inset-left);
+		padding-right: env(safe-area-inset-right);
 	}
 
 	.bounds {
+		height: 100%;
+		display: grid;
+		grid-template: 1fr / 1fr;
 		margin-left: auto;
 		margin-right: auto;
 		max-width: 26rem;
 	}
 
 	.grid {
-		min-height: 96vh;
-		padding-top: env(safe-area-inset-top);
-		padding-bottom: env(safe-area-inset-bottom);
-		padding-left: env(safe-area-inset-left);
-		padding-right: env(safe-area-inset-right);
 		display: grid;
 		grid-template-rows: auto 1fr;
 	}
