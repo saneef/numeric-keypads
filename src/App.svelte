@@ -72,6 +72,7 @@
 <script>
 	import KeypadTester from "./KeypadTester.svelte";
 	import Report from "./Report.svelte";
+	import DoubleTapZoomKiller from "./DoubleTapZoomKiller.svelte";
 	import { shuffle } from "./lib/random.js";
 
 	export let trials;
@@ -134,3 +135,4 @@
 		</div>
 	</div>
 </div>
+<DoubleTapZoomKiller />
