@@ -70,11 +70,13 @@
 <script>
 	import KeypadTester from "./KeypadTester.svelte";
 	import Report from "./Report.svelte";
-	import { shuffle } from "./lib/random.js";
+	import { shuffle, random } from "./lib/random.js";
 
 	export let trials;
 	export let disableShuffle = false;
 	const variants = ["no-border", "bordered", "circular"];
+	const numOfDigits = 6;
+	const digits = random(6).split("");
 
 	let currentIndex = 0;
 	const totalTrials = trials * variants.length;
@@ -116,7 +118,7 @@
 			{#each state as s, index (s.id)}
 				<div class:hide="{index !== currentIndex}">
 					<KeypadTester
-						numOfDigits="{6}"
+						{digits}
 						variant="{s.variant}"
 						{disableShuffle}
 						on:complete="{onAnswer}" />
