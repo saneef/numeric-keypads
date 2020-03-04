@@ -16,6 +16,9 @@
 		--color-success: #37b24d;
 		--color-warning: #f59f00;
 		--color-danger: #f03e3e;
+		--color-washed-success: #ebfbee;
+		--color-washed-warning: #fff9db;
+		--color-washed-danger: #fff5f5;
 		--color-text: var(--color-gray-9);
 		--color-text-light: var(--color-gray-7);
 

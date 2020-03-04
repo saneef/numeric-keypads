@@ -31,12 +31,6 @@
 		outline: none;
 	}
 
-	button[disabled] {
-		color: var(--color-gray-3);
-		border-color: currentColor;
-		pointer-events: none;
-	}
-
 	.btn {
 		min-height: 2.5em;
 		display: flex;
@@ -81,6 +75,30 @@
 		border: 1px solid var(--color-border);
 		margin: 0.125em;
 		border-radius: 2000px;
+	}
+
+	.bordered .btn--del,
+	.circular .btn--del {
+		background-color: var(--color-washed-warning);
+	}
+
+	.circular .btn--del {
+		border-color: var(--color-warning);
+	}
+
+	.bordered .btn--confirm,
+	.circular .btn--confirm {
+		background-color: var(--color-washed-success);
+	}
+
+	.circular .btn--confirm {
+		border-color: var(--color-success);
+	}
+
+	button[disabled] {
+		color: var(--color-gray-3);
+		border-color: currentColor !important;
+		pointer-events: none;
 	}
 
 	.bordered button[disabled],
