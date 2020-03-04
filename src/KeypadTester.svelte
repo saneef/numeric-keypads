@@ -71,16 +71,18 @@
 	import { createEventDispatcher } from "svelte";
 	import keypadTesterMachine from "./machines/keypad-tester";
 	import useMachine from "./lib/useMachine";
-	import { random } from "./lib/random";
+	import { random, shuffle } from "./lib/random";
 	import NumericKeypad from "./NumericKeypad.svelte";
 
 	const dispatch = createEventDispatcher();
 
 	export let numOfDigits = 6;
+	export let digits;
 	export let variant = "circular";
 	export let disableShuffle = false;
 
-	let currentNumber = "";
+	$: numOfDigits = Array.isArray(digits) ? digits.length : numOfDigits;
+
 	let paddedString = Array.from({ length: numOfDigits }).map(c => "");
 
 	const [state, send] = useMachine(
@@ -89,7 +91,9 @@
 			{
 				numOfDigits,
 				digits: [],
-				pin: random(numOfDigits),
+				pin: Array.isArray(digits)
+					? shuffle(digits).join("")
+					: random(numOfDigits),
 			}
 		)
 	);
