@@ -78,6 +78,7 @@ export default Machine(
 			}),
 			deleteLastDigit: assign((ctx, event) => ({
 				...ctx,
+				deletes: ctx.deletes + 1,
 				digits: ctx.digits.slice(0, -1),
 			})),
 		},

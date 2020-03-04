@@ -98,11 +98,9 @@
 	);
 
 	function onAnswer(e) {
-		const { pin, timeTaken } = e.detail;
 		state[currentIndex] = {
 			...state[currentIndex],
-			pin,
-			timeTaken,
+			...e.detail,
 		};
 		currentIndex += 1;
 	}

@@ -19,6 +19,7 @@
 
 <script>
 	export let data = [];
+
 	let groupedData;
 	$: groupedData = data.reduce((acc, cur) => {
 		const { variant, ...rest } = cur;
@@ -35,9 +36,10 @@
 		.map((variant, i) => {
 			let length = 0;
 			let sum = groupedData[variant].reduce((acc, cur) => {
-				if (cur.timeTaken) {
+				const timeTaken = cur.endedAt - cur.startedAt;
+				if (timeTaken) {
 					length++;
-					return acc + cur.timeTaken;
+					return acc + timeTaken;
 				}
 
 				return acc;

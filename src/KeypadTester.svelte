@@ -91,6 +91,7 @@
 			{
 				numOfDigits,
 				digits: [],
+				deletes: 0,
 				pin: Array.isArray(digits)
 					? shuffle(digits).join("")
 					: random(numOfDigits),
@@ -110,12 +111,7 @@
 	}
 
 	function onComplete() {
-		const timeTaken = context.endedAt - context.startedAt;
-
-		dispatch("complete", {
-			pin: context.pin,
-			timeTaken,
-		});
+		dispatch("complete", context);
 	}
 </script>
 
