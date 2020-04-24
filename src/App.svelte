@@ -133,7 +133,7 @@
 				{/if}
 			{/each}
 			{#if totalTrials <= currentIndex}
-				<Report data="{state}" />
+				<Report data="{state}" {shuffle} />
 			{/if}
 		</div>
 	</div>

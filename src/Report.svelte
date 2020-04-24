@@ -21,6 +21,7 @@
 
 <script>
 	export let data = [];
+	export let shuffle = false;
 
 	let groupedData;
 	$: groupedData = data.reduce((acc, cur) => {
@@ -80,7 +81,12 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Variant</th>
+				<th>
+					Variant
+					{#if shuffle}
+						<span class="small">🔀</span>
+					{/if}
+				</th>
 				<th>Mean time</th>
 			</tr>
 		</thead>
