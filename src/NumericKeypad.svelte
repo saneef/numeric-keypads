@@ -65,7 +65,12 @@
 	}
 
 	.circular {
+		grid-template-columns: repeat(3, min-content);
 		justify-items: center;
+		justify-content: center;
+		grid-column-gap: 1rem;
+		grid-row-gap: 0.25rem;
+		padding-bottom: 0.5rem;
 	}
 
 	.circular .btn {
